@@ -353,3 +353,41 @@ do
 done 
 
 ```
+
+## Functions 
+
+```bash 
+
+#!/bin/bash 
+
+# To make a function
+function welcome {
+    echo "---------------------" 
+    echo "hello world" 
+    echo "---------------------" 
+}
+
+# To call the function (Just type the name of the function)
+welcome 
+welcome 
+welcome
+
+```
+
+```bash 
+
+#!/bin/bash 
+
+# This is another way to make a function in shell scripts
+welcome(){
+    echo "------------------------" 
+    echo $SHELL;pwd
+    echo "------------------------"
+}
+
+# To call the function just mention the function name
+welcome 
+welcome
+
+```
+
