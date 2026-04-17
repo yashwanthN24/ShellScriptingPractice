@@ -391,3 +391,38 @@ welcome
 
 ```
 
+- Passing arguments
+
+```bash 
+
+#!/bin/bash 
+
+function welcomeNote {
+    echo "---------------------------" 
+    echo "Wecome $1" 
+    echo "This is $0 file"
+}
+
+welcomeNote raju 
+welcomeNote gucci
+
+```
+
+## Arguments in scripts 
+
+- `$0` represents the filename/scriptname
+- `$1` represents first argument passed as command line argument
+- `$#` represents the count of number of arguments passed to this script 
+- `$@` represents all the arguments passed to a script as an array
+- `$?` is used to represent the exit status of the previous ran linux command 0 represent successful execution of command and non-zero means unsuccessful command 
+
+
+- `exit` or `exit <exit_code>` is used to stop a script used in if_else 
+
+- `dirname fileAbsolutepath` gives the directory path striping the main file
+
+- `basename fileAbsolutePath`  gives only the filename stripping the directory info
+
+- `realpath filename` gives the full absolute path of the file 
+
+
