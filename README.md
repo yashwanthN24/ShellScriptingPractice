@@ -425,4 +425,148 @@ welcomeNote gucci
 
 - `realpath filename` gives the full absolute path of the file 
 
+- `if [[ -d folder_name ]]` checks if folder exists 
+
+- `if [[ ! -d folder_name ]]` check if folder not exists 
+
+- `if [[ -f file_name ]]` if file exists 
+
+- `if [[ ! -f file_name ]]`  if file not exists 
+
+```bash 
+
+
+#!/bin/bash 
+
+FILEPATH=$(pwd)/yash.txt
+
+if [[ ! -f $FILEPATH ]]
+then 
+    echo "File Doesn't exist"
+    echo "Creating file" 
+    touch $FILEPATH
+else 
+    echo "File Exists"
+fi
+
+
+FILEPATH2=$(pwd)/test
+
+if [[ ! -d $FILEPATH2 ]]
+then 
+    echo "directory not found" 
+    echo "Creating directory..." 
+    mkdir -p $FILEPATH2
+else 
+    echo "directory exists" 
+fi
+
+
+```
+
+**Bash Variables** 
+
+- `RANDOM` - returns A Random integer between 0 and 32767 is generated 
+
+- `UID` - User ID of the user logged in 
+
+
+
+
+```bash 
+
+#!/bin/bash 
+
+for _ in {1..20}
+do 
+    echo "Random no : $RANDOM" 
+    echo "UID : $UID" 
+done
+
+
+no=$(($RANDOM % 6 + 1 ))
+echo "Random number is : $no " 
+
+if [[ !  $UID -eq  0 ]]
+then 
+    echo "Please login as root user" 
+else 
+    echo "Login Successful" 
+fi 
+
+```
+
+## Linux Redirects 
+
+- you want redirect the output of any linux command to a file we can use the > (stdout) 
+
+```bash 
+
+ls > output.txt # writes the output of ls command into output file 
+
+hostname > output.txt # > overides the content so only hostname is stored now 
+
+# To Append use >> 
+
+uname -o >> output.txt 
+
+```
+
+
+
+| Symbol | Represents | Example |
+| --- | --- | --- |
+| > | stdout (Stores Output of command (overriding))  | cd /root > output.txt |
+| >>  | stdout (Stores Output of command (Appending)) | hostname >> output.txt  |
+| 2> | write only stderr i.e only errors ignore output stdout | cd /root 2> error.txt  |
+| &>  | writes both output (stdout) and errors (stderr) | cd /root &> output.log |
+
+
+- lets say you dont want to store the output (stdout) nor the errors (stderr) you can write /dev/null its ignored 
+
+```bash 
+
+ping -c 1 www.google.com >> /dev/null # This way we dont see the output on terminal and no output or errors are shown in terminal nor stored in any logs 
+ 
+```
+
+## Debugging  Shell Scripts 
+
+- `set -x` To run the script in debug mode which shows which command ran and its corresponding output 
+- `set -e` To exit the script whenever any command fails immediately 
+- `set -o pipeline` To exit when any command fails in pipelines 
+
+```bash 
+
+#!/bin/bash 
+
+set -e # If you want to exit script when a command fails  
+set -x # to run script in debug mode
+
+pwd 
+
+cd /root 
+
+hostname
+
+uname -o  
+
+```
+
+- Together use these 3 in scripts for best practices and better scripts 
+
+## Running Scripts in background 
+
+`nohup` command is used to run scripts in background making sure the script keep running even if the terminal session your using is closed 
+
+**Syntax** 
+
+`nohup script_name &`
+
+- This redirect both errors and output to a file name nohup.out running the script in background 
+- if you want to discard the output and error use this 
+
+`nohup script > /dev/null 2>&1 &` 
+
+- This discards both the output (stdout) and the errors (stderr) from the script and runs the script in background even if terminal closes 
 
