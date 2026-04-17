@@ -169,7 +169,187 @@ echo "Replaced = $(echo $myvar | sed 's/hey/yo/gi' )" # command substitution
 
 ```
 
+## User Interaction 
+
+```bash 
+
+echo "Your name ?:" 
+
+read name
+
+echo $name 
+
+read -p "what is your name ?" name
+
+echo $name 
 
 
+```
+
+## Arthematic operations 
+
+```bash 
 
 
+#!/bin/bash 
+
+x=2
+y=3 
+
+echo $y + $x # dosnt work just prints the value of variables 
+
+# To evaluate 
+
+echo $((x+y))
+
+
+echo $(($x + $y))  # works without $ as well when you use $(())
+
+echo " Addition : $((x+y))" 
+
+echo " Addition2 : $(($x+ $y))"
+
+let b=$x*$y
+
+let b1=x*y
+echo "Multiplication : $b  $b1"
+
+```
+
+## Conditionals
+
+**if-else , elif** 
+
+```bash 
+
+#!/bin/bash 
+
+read -p "Enter your marks" marks 
+
+if [[ $marks -ge 80 ]]
+then 
+    echo "1st Division" 
+elif [[ $marks -ge 60 ]]
+then
+    echo "2nd Division" 
+elif [[ $marks -ge 40 ]]
+then
+    echo "3rd Division" 
+else 
+    echo "Fail" 
+fi
+
+```
+
+**case** 
+
+```bash 
+
+#!/bin/bash 
+
+echo "Provide a choice"
+echo "a)To see current date" 
+echo "b)To see all files in current directory" 
+echo "c)To see current location" 
+
+read -p "Enter your choice : " choice 
+
+case $choice in 
+    a) 
+        echo " Today's date is : "
+        date 
+        echo "Ending ..."
+        ;;
+
+    b) 
+        ls 
+        ;;
+
+    c)  
+        pwd
+        ;; 
+
+    *)
+        echo "Invalid choice" 
+        echo "Provide any options from a , b or c"
+        ;;
+esac 
+
+```
+
+## Loops 
+
+**For Loop** 
+
+```bash 
+
+
+#!/bin/bash 
+
+for i in {1..10}
+do 
+    echo "number is $i" 
+done 
+
+for name in raju "mighty" "ales" 
+do 
+    echo "name is ${name^^}"
+done
+
+```
+
+```bash 
+
+# infinite loop 
+
+#!/bin/bash 
+
+for ((; ; ))
+do 
+    echo "hi Buddy" 
+    sleep 5s 
+done 
+
+```
+
+**While Loop** 
+
+```bash 
+
+count=0 
+
+while [[ $count -lt $num ]]
+do 
+    echo "Number is again : $count" 
+    let count++
+done 
+
+```
+
+```bash 
+
+#infinite loop
+
+#!/bin/bash 
+
+while true 
+do 
+    echo "hi buddy" 
+    sleep 2s 
+done
+
+```
+
+**Until Loop**
+
+```bash 
+
+a=20
+
+until [[ $a -eq 10 ]]
+do 
+    echo "Value of a is $a" 
+    let a--
+done 
+
+```
