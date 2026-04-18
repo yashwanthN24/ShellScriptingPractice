@@ -659,3 +659,49 @@ systemctl status logrotate.timer
 
 ```
 
+## anacron 
+
+- Anacron is used to schedule periodic tasks in Linux systems that are not running 24/7, such as personal computers 
+- Ideal for tasks that need to run daily , weekly or monthly,but not at a fixed time each day 
+
+- Anacron checks once a day to see if there are any jobs scheduled to run that day. If the system was off at the scheduled time, Anacron will run the missed tasks as soon as the system is back up 
+
+**Install** 
+
+```bash 
+
+#Ubuntu/Debian 
+sudo apt install anacron 
+
+#RHEL/Fedora 
+yum install anacron
+
+```
+
+`/etc/anacrontab` - To check the configuration of anacron jobs 
+
+```bash
+
+15 5 backup_trigger /tmp/backup.sh
+
+# Here 
+
+# 15 means the period (evey 15 days)
+
+# 5 is the delay before the script starts 
+
+# backup_trigger is just a name given to this job 
+
+# Actual shell sctipt 
+
+```
+
+Trigger this anacron job manually for test via 
+
+```bash 
+
+sudo anacron -fdn
+
+``` 
+
+Else they run automatically dont need to trigger manually 
