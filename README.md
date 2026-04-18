@@ -570,3 +570,92 @@ uname -o
 
 - This discards both the output (stdout) and the errors (stderr) from the script and runs the script in background even if terminal closes 
 
+## Automating Scripts 
+
+- `at` is used for scheduling one time task i.e should run at 12:00 AM (Not repitive doesn't run everyday)
+- `crontab` is used to schedule repitative tasks that should run everyday or every week or every month 
+
+```bash 
+
+at 12:00 AM
+
+at> echo "Hello world" > output.txt
+at>EOF (ctrl + D)
+
+```
+
+`crontab -l` lists all cron jobs setup for the current user 
+
+`crontab -e` opens crontab editor to add a new cron job
+
+```bash
+
+05 12 * * * cd /workspaces/ShellScriptingPractice/BashScripts/ && ./automation_cron.sh
+
+```
+
+
+
+
+## Log Rotation 
+
+- Rotation , compression and deletion of logs 
+- logrotate provides these utility install it 
+
+```bash 
+
+sudo apt update && sudo apt install logrotate
+
+```
+
+`/etc/logrotate.conf` - contains common config for all log files edit it as per requirements 
+
+`/etc/logrotate.d` - contains all applications specific logrotate config for new log file create a file named with the same name as app (convention)
+
+- For each file in `/etc/logrotate.d` you will find this config customize as needed 
+
+```bash 
+
+/var/log/apt/history.log {
+  rotate 12
+  monthly
+  compress
+  missingok
+  notifempty
+}q
+
+```
+
+- logrotate -d (debug mode) simulates the rotation process without making changes, 
+
+```bash 
+logrotate -d /etc/logrotate.conf 
+
+# or if your a non root user use sudo if applicable via sudoers  
+
+sudo logrotate -d /etc/logrotate.conf 
+
+```
+
+
+- To manually trigger the logrotate you 
+
+```bash 
+
+logrotate /etc/logrotate.conf
+
+# or if not root user 
+
+sudo logrotate /etc/logrotate.conf
+
+```
+
+logrotate itself triggers this automatically at a specific time 
+To check that
+
+```bash 
+
+systemctl status logrotate.timer
+
+```
+
