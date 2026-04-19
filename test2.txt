@@ -1,0 +1,1 @@
+grep -o "s" <<< "$STR" | wc -l 

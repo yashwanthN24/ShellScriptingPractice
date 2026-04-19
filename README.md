@@ -926,5 +926,171 @@ find /path -mtime 15 # search 15 days old files in that directory
 ![alt text](image.png)
 
 
+
 ![alt text](image-1.png)
 
+
+
+## sed 
+
+- sed (Stream Editor) to edit files without opening them 
+
+# Sed Cheat Sheet with Explanations
+
+### Printing Specific Lines or Ranges
+
+- `sed -n '1p' file_name`  
+  **Prints only the 1st line** (suppress default output with `-n`, then `p` for print)
+
+- `sed -n '1,5p' file_name`  
+  **Prints lines 1 through 5** (range specified as `start,end`)
+
+- `sed -n '$p' file_name`  
+  **Prints only the last line** (`$` represents last line)
+
+### Pattern Matching (Print Lines Containing Text)
+
+- `sed -n '/India/p' file_name`  
+  **Prints all lines containing "India"** (pattern between `/.../`)
+
+### Multiple Expressions
+
+- `sed -n -e '2p' -e '5p' file_name`  
+  **Prints line 2 AND line 5** (`-e` allows multiple expressions)
+
+- `sed -n -e '/India/p' -e '/Germany/p' file_name`  
+  **Prints lines containing India OR Germany** (multiple pattern matches)
+
+### Advanced Line Selection
+
+- `sed -n '2,+4p' file_name`  
+  **Prints 4 lines starting from line 2** (`+n` means next n lines)
+
+- `sed -n '1~2p' file_name`  
+  **Prints every 2nd line starting from line 1** (`~step` for step intervals)
+
+- `sed -f ex_file file_name`  
+  **Reads sed expressions from external file** (`ex_file` contains sed commands)
+
+### Substitution (Replace Text)
+
+- `sed 's/<old>/<new>/g' file_name`  
+  **Replaces all occurrences of `<old>` with `<new>`** (`s` for substitute, `g` for global)
+
+- `sed '5 s/<old>/<new>/g' file_name`  
+  **Replaces text ONLY on line 5** (line number before `s`)
+
+- `sed '5! s/<old>/<new>/g' file_name`  
+  **Replaces text on ALL lines EXCEPT line 5** (`!` means not)
+
+- `sed -i 's/<old>/<new>/g' file_name`  
+  **Replaces AND saves changes to original file** (`-i` for in-place edit instead of  just printing output on termianal which later you had to collect via > you can just use -i to fo changes to the orginal file)
+
+- `sed '/Paul/ s/25000/35000/g' file_name`  
+  **Replaces salary only on lines containing "Paul"** (pattern before `s`)
+
+- `sed '/Paul/ s/24000/32000' filename` 
+  **Replaces the first occurrence of 24000 with 32000 only on lines containing "Paul"** (pattern /Paul/ restricts the substitution to matching lines, and no g flag means only the first match per line is replaced).
+
+### Deletion
+
+- `sed '1d' file_name`  
+  **Deletes line 1** (`d` for delete)
+
+- `sed '1,2d' file_name`  
+  **Deletes lines 1-2** (range deletion)
+
+- `sed '$d' file_name`  
+  **Deletes last line**
+
+- `sed '/India/d' file_name`  
+  **Deletes all lines containing "India"**
+
+- `sed '/^$/d' file_name`  
+  **Deletes all empty lines** (`^$` matches empty lines)
+
+### Text Manipulation
+
+- `sed 's/\t/ /g' file_name`  
+  **Replaces all tabs with spaces** (`\t` for tab character)
+
+- `sed -n '/India/ w new_file' file_name`  
+  **Writes matching lines to new_file** (`w` for write)
+
+### Insert/Add/Change Lines
+
+- `sed '5 a new_text' file_name`  
+  **Adds "new_text" AFTER line 5** (`a` for append)
+
+- `sed '/Paul/ a new_text' file_name`  
+  **Adds "new_text" after lines containing "Paul"**
+
+- `sed '5 c new_text' file_name`  
+  **Replaces ENTIRE line 5 with "new_text"** (`c` for change)
+
+- `sed '/Paul/ i new_text' file_name`  
+  **Inserts "new_text" BEFORE lines containing "Paul"** (`i` for insert)
+
+### Display & Debugging
+
+- `sed -n 'l' file_name`  
+  **Shows hidden characters** (`l` like "list" - shows tabs, newlines)
+
+- `sed -n 'l 50' file_name`  
+  **Wraps lines at 50 characters AND shows hidden chars**
+
+- `sed '=' file_name`  
+  **Prints line numbers** (before each line)
+
+### File Operations
+
+- `sed '3 r externalfile' file_name`  
+  **Inserts content of externalfile AFTER line 3** (`r` for read)
+
+### Control Flow
+
+- `sed '/India/ q' file_name`  
+  **Stops at first line containing "India"** (`q` for quit)
+
+- `sed '5 q' file_name`  
+  **Stops after line 5**
+
+- `sed '/India/ q 100' file_name`  
+  **Quits with exit status 100**
+
+- `sed '2 e date' file_name`  
+  **Executes external command "date" on line 2** (`e` for execute)
+
+### Sed Regular Expressions
+
+| Pattern | Meaning |
+|---------|---------|
+| `^` | Start of line |
+| `$` | End of line |
+| `.` | Any single character |
+| `[]` | Match character set |
+| `[^]` | NOT character set |
+| `*` | Zero or more occurrences |
+
+**Examples:**
+```bash
+sed -n '/^2/p' file_name          # Lines starting with "2"
+sed -n '/ia$/p' file_name         # Lines ending with "ia"
+sed -n '/^S...a$/p' names         # 5-letter names: S???a
+sed -n '/^V/p' names              # Names starting with V
+sed -n '/a$/p' names              # Names ending with a
+sed -n '/^[A-D]/p' names          # Names starting with A,B,C,D
+sed -n '/[AC]/p' names            # Names containing A or C
+```
+
+### POSIX Character Classes
+```bash
+sed -n '/[[:alpha:]]/p' file      # Alphabetic characters
+sed -n '/[[:digit:]]/p' file      # Digits 0-9
+sed -n '/[[:alnum:]]/p' file      # Alphanumeric
+sed -n '/[[:space:]]/p' file      # Whitespace
+sed -n '/[[:lower:]]/p' file      # Lowercase letters
+sed -n '/[[:upper:]]/p' file      # Uppercase letters
+```
+
+**Pro Tip:** Always use `-n` with `p` to suppress automatic printing!
