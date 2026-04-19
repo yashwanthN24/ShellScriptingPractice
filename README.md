@@ -376,6 +376,31 @@ welcome
 
 ```bash 
 
+function myfunc {
+    local NAME
+    echo $NAME
+}
+
+# here local means this variable is accessible only within this function outside this function variable NAME wont be accessible
+
+```
+
+```bash 
+
+my_function() {
+    local temp="hello"  # Only visible here
+    echo "$temp"
+}
+my_function
+echo "$temp"  # Prints nothing
+
+```
+
+
+
+
+```bash 
+
 #!/bin/bash 
 
 # This is another way to make a function in shell scripts
@@ -405,6 +430,32 @@ function welcomeNote {
 
 welcomeNote raju 
 welcomeNote gucci
+
+```
+
+```bash 
+
+my_function() {
+    if [ some_condition ]; then
+        return 0  # Success
+    else
+        return 1  # Failure
+    fi
+}
+
+my_function
+status=$?  # Capture exit status
+echo "Status: $status"
+```
+
+```bash 
+
+get_name() {
+    echo "John"
+}
+
+name=$(get_name)  # Captures output
+echo "$name"  # Prints: John
 
 ```
 
