@@ -705,3 +705,21 @@ sudo anacron -fdn
 ``` 
 
 Else they run automatically dont need to trigger manually 
+
+## Rsync 
+
+- Rsync is used to primarily tranfer files between two servers either local to remote or remote to remote 
+
+**Syntax** 
+
+```bash 
+
+rsync -v filename/sourcepath username@hostname:/destinationpath
+
+```
+
+- Other Options : 
+    -v - To show verbose details of the transfer
+    -z - To compress and send file 
+    -a - To archive and send preserves the files permissions as well 
+
