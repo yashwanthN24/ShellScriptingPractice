@@ -774,3 +774,58 @@ rsync -v filename/sourcepath username@hostname:/destinationpath
     -z - To compress and send file 
     -a - To archive and send preserves the files permissions as well 
 
+## Vi or Vim Editor 
+
+- To open a file in vim editor 
+
+`vim filename` 
+
+- To open the file in read only mode 
+
+`vim -R filename` or `view filename` 
+
+- If your already inside vim editor and want to make file readonly 
+
+`:set readonly`
+
+`:set noreadonly`
+
+| Symbol | Represents | Use case |
+| --- | --- | --- |
+| i | Insert mode | To write content  |
+| esc + : | Command mode | To execute command like save to new file |
+| :wq! | Save and Exit | -  |
+| :q! | Exit without saving | - |
+| Shift + g | To go to end of the file | -  |
+| gg | To go to beginning of file | - |
+| /word  | Forward Search | To search for a specific word from top of the file |
+| ?word  | Backward Search | To search for a specific word from the end of file |
+| n | For next occurence  | -  |
+| *  | Forward search the word cursor points to | - |
+| #  | Backward search the word cursor points to | -  |
+| :%s/currentword/newWord/g | To replace a word globally in the file | -  |
+| u | To undo a change | - |
+| ctrl/cmd + r  | To redo a change |  |
+| o | To start editing in the next line |  |
+| Shift + o  | To start editing the above line from the current cursor |  |
+| Shift + i  | To start editing from the beginning of the line |  |
+| Shift + a  | To start editing from the end of line |  |
+| x | To delete a character where cursor is present |  |
+| r | To replace a single character where cursor is present |  |
+| dd | To delete a line where cursor is pointing to (Its cut actually not delete) |  |
+| :e! | To undo all the changes (Multiple changes) |  |
+| 15dd | Deletes 15lines from the current cursor |  |
+| p | To paste the copied/cut content |  |
+| Shift + p | To paste above the current line (cursor) |  |
+| Shift + v  | To select a whole line where cursor is currently at |  |
+| v  | To select a character then arrow keys to extend |  |
+| y | To copy the selected text |  |
+| :set nu | To print the line numbers in file |  |
+| :set nonu | To remove the line numbers in file |  |
+| :syntax on | To add color-coding in vim editor |  |
+| :syntax off | To remove color-coding in vim editor |  |
+| :121 | Jumps to 121 line of the file | Works only when you have set nu enabled |
+| vim -o file1 file2  | To read multiple files |  |
+| ctrl/cmd + w (twice) | To change the file selected |  |
+| vim -d file1 file2 | To compare two files (diff) |  |
+
