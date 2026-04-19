@@ -990,6 +990,7 @@ find /path -mtime 15 # search 15 days old files in that directory
   **Replaces salary only on lines containing "Paul"** (pattern before `s`)
 
 - `sed '/Paul/ s/24000/32000' filename` 
+
   **Replaces the first occurrence of 24000 with 32000 only on lines containing "Paul"** (pattern /Paul/ restricts the substitution to matching lines, and no g flag means only the first match per line is replaced).
 
 ### Deletion
