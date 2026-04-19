@@ -829,3 +829,102 @@ rsync -v filename/sourcepath username@hostname:/destinationpath
 | ctrl/cmd + w (twice) | To change the file selected |  |
 | vim -d file1 file2 | To compare two files (diff) |  |
 
+# awk 
+
+- For text processing 
+
+```bash 
+
+awk -F',' '{print $2,$4}' filename  # prints the 2nd and 4th column of  each line in the file 
+
+awk -F',' '{print $NF}' filename # prints the last column of each line in the file
+
+``` 
+
+## cut 
+
+- For text processing 
+
+```bash 
+
+cut -c1 names.txt # To get the first chracter of each line in the file
+
+cut -c1,5 names.txt # To get the first and the fifth character of each line in the file
+
+cut -c1-5 names.txt # To get first to fifth character in each line of the file 
+
+# For CSV files 
+
+cut -d, -f 2 countries.csv # gets the 2 column (Column numbering starts from 1) of the comma separated values -d is for delimiter ,  
+
+cut -d, -f 2 countries.txt
+
+```
+
+
+```bash 
+
+ls -ltr | awk '{print $NF}' | cut -c1-2 
+
+
+```
+
+## find 
+
+- find command searched for files in a directory hierarchy 
+
+**Syntax** 
+
+`find /path/ -name <filename>`
+
+```bash 
+
+find . -name a124 # searches for the file named a124 in the current directory (based on the filename)
+
+```
+
+```bash 
+
+# How to search files based on size ?
+
+# find /path/ -size 50M 
+
+# M for mb , G for gb , K for kb and c for bytes 
+
+
+find . -size 48M 
+
+# finds all files that are of size minimum of 48MB or above in the current directory
+
+# How to find only files or only directories in a given path ?
+
+# find /path/ -type f 
+
+# f (for file) , d (for directory) , l (for symbolic link) , b (for block device) , s (for socket)
+
+find . -type f # find all files in the current directory 
+
+
+find /path/ -iname a123 # gets all files ignoring case by filename match a123 or even A123
+
+find /path/ -user root # get all files of root only
+
+find /path/ -iname a* # To get all files that start with letter a 
+
+find /path/ -size 20M # To get all files with size exactly 20MB 
+
+find /path/ -size +20M # To get all files with 20Mb or above size
+
+find /path/ -maxdepth 1 -size +10M # To get all files with above 10mb or 10mb and search for current directory and its directory at one level only 
+
+find /path/  -size +1M -size -50M # all files whose size is inbetween 1Mb to 50mb not 1mb or 50mb
+
+find /path -mtime 15 # search 15 days old files in that directory 
+
+```
+
+![alt text](image.png)
+
+
+![alt text](image-1.png)
+
